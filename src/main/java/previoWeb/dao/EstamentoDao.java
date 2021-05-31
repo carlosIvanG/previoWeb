@@ -37,20 +37,19 @@ public class EstamentoDao implements crud<Estamento> {
 
 	@Override
 	public List<Estamento> listar() {
-		List<Estamento> servicio = new ArrayList();
+		List<Estamento> estamento = new ArrayList();
 		try {
 			PreparedStatement preparedStatement = conexion.setPreparedStatement(listar);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String descripcion = rs.getString("descripcion");
-				int tienda = rs.getInt("tienda");
-				servicio.add(new Estamento(id, null, descripcion));
+				estamento.add(new Estamento(id, null, descripcion));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return servicio;
+		return estamento;
 	}
 
 	@Override
