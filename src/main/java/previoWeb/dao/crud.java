@@ -3,6 +3,8 @@ package previoWeb.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import previoWeb.modelo.Documento;
+
 public interface  crud <T>{
 	
 	public void insertar(T obj) throws SQLException;

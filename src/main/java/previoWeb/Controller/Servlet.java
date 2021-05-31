@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import previoWeb.dao.DocumentoDao;
 import previoWeb.dao.EstamentoDao;
+import previoWeb.modelo.Documento;
 import previoWeb.modelo.Estamento;
 
 /**
@@ -21,6 +23,7 @@ import previoWeb.modelo.Estamento;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EstamentoDao eDao;
+	private DocumentoDao dDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -35,6 +38,7 @@ public class Servlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		this.eDao = new EstamentoDao();
+		this.dDao = new DocumentoDao();
 	}
 
 	/**
@@ -44,14 +48,19 @@ public class Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Estamento> estamentos = eDao.listar();
+		List<Documento> documentos = dDao.listar();
 		request.setAttribute("estamentos", estamentos);
+		request.setAttribute("documentos", documentos);
+		
 		request.setAttribute("titulo", "registro");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 		System.out.println("=>" + estamentos);
 		// TODO Auto-generated method stub
-
+		
+		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
